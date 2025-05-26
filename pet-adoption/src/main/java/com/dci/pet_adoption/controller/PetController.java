@@ -1,5 +1,6 @@
 package com.dci.pet_adoption.controller;
 
+import com.dci.pet_adoption.model.Pet;
 import com.dci.pet_adoption.service.PetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -30,8 +31,16 @@ public class PetController {
         model.addAttribute("pet",petService.getPetById(id));
 
         return "pets/pet-details";
-
     }
+
+    @GetMapping("/new")
+    private String createPet(Model model){
+        model.addAttribute("pet",new Pet());
+
+        return "pets/pet-from";
+    }
+
+
 
 
 }

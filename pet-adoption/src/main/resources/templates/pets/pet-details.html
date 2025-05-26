@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pet Details</title>
+</head>
+<body>
+  <h1>Pet Details <span th:text="${pet.name}"></span></h1>
+
+  <p th:text="${pet.age} + ' Years old'"></p>
+  <p th:text="'Breed: ' + ${pet.breed}"></p>
+</body>
+</html>
