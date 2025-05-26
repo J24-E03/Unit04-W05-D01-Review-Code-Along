@@ -9,5 +9,7 @@
 
   <p th:text="${pet.age} + ' Years old'"></p>
   <p th:text="'Breed: ' + ${pet.breed}"></p>
+
+  <a th:href="@{/pets/delete/{id}(id=${pet.petId})}">Delete Pet</a>
 </body>
 </html>

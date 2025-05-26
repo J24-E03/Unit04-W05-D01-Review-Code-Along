@@ -1,10 +1,7 @@
 package com.dci.pet_adoption.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,5 +31,10 @@ public class Pet {
     @Min(value = 0, message = "Pet cannot be below 0")
     @Max(value = 20, message = "Pet cannot be above 20 years old")
     private int age;
+
+    @ManyToOne
+    @JoinColumn(name = "adoption_center_id")
+    private AdoptionCenter adoptionCenter;
+
 
 }

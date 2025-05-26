@@ -1,10 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+      .error{
+        color:red
+      }
+    </style>
 </head>
 <body>
+
+<!--
+method = What HTTP method are we sending (html forms only support post and get natively
+
+action = where are we sending this form
+-->
+
+
+  <h1 th:text="${pet.petId} == null ? 'Create a new pet' : 'update pet information ' + ${pet.name}"></h1>
+  <form
+          th:object="${pet}"
+          method="post"
+          th:action="${pet.petId == null}  ? @{/pets/save} : @{/pets/update}">
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" th:field="*{name}"/>
+    <p class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+
+    <input type="hidden" th:field="*{petId}"/>
+
+    <label for="breed">Breed:</label>
+    <input type="text" id="breed" th:field="*{breed}"/>
+    <p class="error" th:if="${#fields.hasErrors('breed')}" th:errors="*{breed}"></p>
+
+
+    <label for="age">Age:</label>
+    <input min="0" max="20" type="number" id="age" th:field="*{age}"/>
+    <p class="error" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></p>
+
+    <label name="adoptionCenter">Adoption Center</label>
+    <select id="adoptionCenter" th:field="*{adoptionCenter}" >
+      <option
+              th:each="center : ${adoptionCenters}"
+              th:value="${center.id}"
+              th:text="${center.name}"
+      ></option>
+    </select>
+
+
+    <button th:text="${pet.petId} == null ? 'Create new Pet' : 'update pet'"></button>
+
+  </form>
 
 </body>
 </html>
